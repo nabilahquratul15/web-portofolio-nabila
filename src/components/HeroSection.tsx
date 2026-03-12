@@ -69,7 +69,7 @@ export default function HeroSection() {
               <div className="flex gap-6 items-center text-slate-400">
                 <a href="https://github.com/nabilahquratul15" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors"><Github size={22} /></a>
                 <a href={`mailto:${myEmail}`} className="hover:text-blue-400 transition-colors"><Mail size={22} /></a>
-                <a href="https://www.instagram.com/nabbila.n" target="_blank" rel="noreferrer" className="hover:text-pink-500 transition-colors"><Instagram size={22} /></a>
+                <a href="https://www.instagram.com/nabbilaa.n" target="_blank" rel="noreferrer" className="hover:text-pink-500 transition-colors"><Instagram size={22} /></a>
               </div>
             </motion.div>
           </div>
