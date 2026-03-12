@@ -4,12 +4,10 @@ import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import SkillsSection from '../components/SkillsSection';
 import ProjectsSection from '../components/ProjectsSection';
-import CertificatesSection from '../components/CertificatesSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 
 const Index = () => {
-  // Kita balikin state isDark supaya Navbar-nya gak error/ilang
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -33,8 +31,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F7FF] dark:bg-slate-950 text-slate-900 dark:text-white">
-      {/* Navbar WAJIB dapet isDark & toggleTheme biar muncul */}
+    <div className="min-h-screen bg-[#F0F7FF] dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-500">
+      {/* Navbar tetap aman */}
       <Navbar isDark={isDark} toggleTheme={toggleTheme} /> 
       
       <main>
@@ -42,7 +40,7 @@ const Index = () => {
         <AboutSection />
         <SkillsSection />
         <ProjectsSection />
-        <CertificatesSection />
+        {/* Sertifikat sudah dibuang dari sini */}
         <ContactSection />
       </main>
       

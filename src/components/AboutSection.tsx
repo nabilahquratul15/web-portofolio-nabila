@@ -17,7 +17,11 @@ export default function AboutSection() {
   const cardBg = isDark ? "bg-[#0F172A]/90 border-blue-900/50 shadow-[0_0_40px_rgba(30,58,138,0.3)]" : "bg-white border-slate-100 shadow-2xl";
   const textColor = isDark ? "text-white" : "text-slate-900";
   const subTextColor = isDark ? "text-slate-400" : "text-slate-500";
-  const accentGradient = isDark ? "from-[#1E3A8A] via-[#1E40AF] to-blue-900" : "from-blue-600 to-cyan-500";
+  
+  // GRADASI DISESUAIKAN: Senada dengan tulisan biru "About Me"
+  const accentGradient = isDark 
+    ? "from-[#3B82F6] via-[#60A5FA] to-[#06B6D4]" 
+    : "from-[#1E3A8A] via-[#3B82F6] to-[#06B6D4]";
 
   const stats = [
     { icon: Palette, value: 'Creative', label: 'Design Style' },
@@ -29,10 +33,12 @@ export default function AboutSection() {
   return (
     <section id="about" className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ${bgColor}`}>
       
+      {/* Glow Background */}
       <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-20 pointer-events-none ${isDark ? "bg-blue-600" : "bg-blue-200"}`}></div>
 
       <div className="container mx-auto px-6 relative z-10">
         
+        {/* HEADER SECTION - NO MORE BLACK TEXT */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,8 +51,10 @@ export default function AboutSection() {
             <span className="font-bold tracking-[0.3em] text-[10px] uppercase text-blue-500">About Me</span>
             <div className="w-8 h-[2px] bg-blue-600"></div>
           </div>
-          <h2 className={`text-5xl md:text-7xl font-black tracking-tighter ${textColor}`}>
-            Get to Know <span className={`text-transparent bg-clip-text bg-gradient-to-r ${accentGradient}`}>About Me</span>
+          
+          {/* Judul sekarang full gradasi biru, tidak ada warna hitam lagi */}
+          <h2 className={`text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r ${accentGradient}`}>
+            Get to Know About Me
           </h2>
           
           <motion.div 
