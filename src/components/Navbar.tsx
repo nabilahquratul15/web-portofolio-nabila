@@ -41,7 +41,6 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        // LOGIKA BARU: Pas di-scroll dia mengecil dan ada border putih tipis yang tegas
         className={`w-full transition-all duration-500 rounded-full ${
           isScrolled 
             ? "max-w-4xl border border-white/30 px-6" 
@@ -63,7 +62,6 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
               {"Nabila's Portfolio"}
             </motion.a>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-6">
               {navItems.map((item) => (
                 <button
@@ -83,7 +81,6 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
               </button>
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="flex items-center gap-2 md:hidden">
               <button onClick={toggleTheme} className="text-white p-1">
                 {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -98,7 +95,6 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
           </div>
         </div>
 
-        {/* Mobile Menu (di dalam kapsul) */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div

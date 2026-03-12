@@ -13,7 +13,6 @@ export default function AboutSection() {
     return () => obs.disconnect();
   }, []);
 
-  // Variabel Warna agar kode di bawah lebih bersih dan tidak merah
   const bgColor = isDark ? "bg-[#0B1120]" : "bg-[#FCFCFC]";
   const cardBg = isDark ? "bg-[#0F172A]/90 border-blue-900/50 shadow-[0_0_40px_rgba(30,58,138,0.3)]" : "bg-white border-slate-100 shadow-2xl";
   const textColor = isDark ? "text-white" : "text-slate-900";
@@ -30,12 +29,10 @@ export default function AboutSection() {
   return (
     <section id="about" className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ${bgColor}`}>
       
-      {/* GLOW BACKGROUND */}
       <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-20 pointer-events-none ${isDark ? "bg-blue-600" : "bg-blue-200"}`}></div>
 
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* HEADER SECTION */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +49,6 @@ export default function AboutSection() {
             Get to Know <span className={`text-transparent bg-clip-text bg-gradient-to-r ${accentGradient}`}>About Me</span>
           </h2>
           
-          {/* INI GARIS BAWAHNYA (Kaya di Skills) */}
           <motion.div 
             initial={{ width: 0, opacity: 0 }}
             whileInView={{ width: "100px", opacity: 1 }}
@@ -64,7 +60,6 @@ export default function AboutSection() {
 
         <div className="max-w-4xl mx-auto">
           
-          {/* MAIN CARD */}
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +68,6 @@ export default function AboutSection() {
             className={`relative p-8 md:p-14 rounded-[3rem] border transition-all duration-500 ${cardBg}`}
           >
             
-            {/* TANDA PETIK */}
             <div className={`absolute -top-7 -left-5 w-16 h-16 rounded-2xl flex items-center justify-center text-white transform -rotate-12 
               ${isDark ? "bg-[#1E3A8A] shadow-[0_0_20px_#1E3A8A]" : "bg-blue-600 shadow-xl"}`}>
               <Quote size={32} />
@@ -95,7 +89,6 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* STATS GRID */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
             {stats.map((item, idx) => (
               <motion.div 

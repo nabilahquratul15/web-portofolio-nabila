@@ -10,7 +10,6 @@ export default function HeroSection() {
       <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
           
-          {/* BAGIAN TEKS */}
           <div className="flex-1 text-left order-2 lg:order-1">
             
             <motion.div 
@@ -20,8 +19,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5 }}
               className="mb-4 flex items-center gap-4"
             >
-              {/* Garis & Welcome tetap biru terang biar jadi aksen */}
-              <div className="w-10 h-[1.5px] rounded-full bg-blue-600 dark:bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+            <div className="w-10 h-[1.5px] rounded-full bg-blue-600 dark:bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
               <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-blue-600 dark:text-blue-400">
                 Hi, Welcome To My Space
               </span>
@@ -34,7 +32,6 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mb-8"
             >
-              {/* NAMA DENGAN GRADASI BIRU GELAP ELEGAN PAS DARK MODE */}
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#1E3A8A] via-[#3B82F6] to-[#06B6D4] dark:from-[#1E3A8A] dark:via-[#3B82F6] dark:to-[#1E40AF]">
                 Nabilah Quratul Aini
               </h1>
