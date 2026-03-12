@@ -51,6 +51,15 @@ export default function AboutSection() {
           <h2 className={`text-5xl md:text-7xl font-black tracking-tighter ${textColor}`}>
             Get to Know <span className={`text-transparent bg-clip-text bg-gradient-to-r ${accentGradient}`}>About Me</span>
           </h2>
+          
+          {/* INI GARIS BAWAHNYA (Kaya di Skills) */}
+          <motion.div 
+            initial={{ width: 0, opacity: 0 }}
+            whileInView={{ width: "100px", opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className={`h-1.5 mt-6 rounded-full bg-gradient-to-r ${accentGradient}`}
+          />
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
