@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Palette, Globe, Zap, GraduationCap } from 'lucide-react';
+import { Palette, Globe, Zap, GraduationCap, Quote } from 'lucide-react';
 
 export default function AboutSection() {
-  const [isDark, setIsDark] = useState<boolean>(false);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const check = () => setIsDark(document.documentElement.classList.contains('dark'));
@@ -13,6 +13,13 @@ export default function AboutSection() {
     return () => obs.disconnect();
   }, []);
 
+  // Variabel Warna agar kode di bawah lebih bersih dan tidak merah
+  const bgColor = isDark ? "bg-[#0B1120]" : "bg-[#FCFCFC]";
+  const cardBg = isDark ? "bg-[#0F172A]/90 border-blue-900/50 shadow-[0_0_40px_rgba(30,58,138,0.3)]" : "bg-white border-slate-100 shadow-2xl";
+  const textColor = isDark ? "text-white" : "text-slate-900";
+  const subTextColor = isDark ? "text-slate-400" : "text-slate-500";
+  const accentGradient = isDark ? "from-[#1E3A8A] via-[#1E40AF] to-blue-900" : "from-blue-600 to-cyan-500";
+
   const stats = [
     { icon: Palette, value: 'Creative', label: 'Design Style' },
     { icon: Globe, value: 'Web', label: 'Exploration' },
@@ -20,103 +27,88 @@ export default function AboutSection() {
     { icon: GraduationCap, value: 'X-10', label: 'Grade' },
   ];
 
-  // Variabel Warna agar serasi dengan Hero & Navbar
-  const sectionBg = isDark ? "bg-[#0B1120]" : "bg-[#FCFCFC]";
-  const textColor = isDark ? "text-slate-300" : "text-slate-500";
-  const titleColor = isDark ? "text-white" : "text-slate-900";
-  const cardBg = isDark ? "bg-[#0F172A]" : "bg-white";
-  const iconBg = isDark ? "bg-[#1E3A8A]/20" : "bg-blue-50";
-
   return (
-    <section id="about" className={`py-20 md:py-32 relative overflow-hidden transition-colors duration-500 ${sectionBg}`}>
+    <section id="about" className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ${bgColor}`}>
       
-      {/* Background Glow - Sama dengan Hero */}
-      <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[130px] opacity-20 z-0 ${isDark ? "bg-blue-600" : "bg-blue-200"}`}></div>
+      {/* GLOW BACKGROUND */}
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-20 pointer-events-none ${isDark ? "bg-blue-600" : "bg-blue-200"}`}></div>
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         
         {/* HEADER SECTION */}
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col items-center text-center mb-16 md:mb-24"
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center text-center mb-20"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className={`w-8 h-[1.5px] ${isDark ? "bg-blue-500 shadow-[0_0_8px_#3b82f6]" : "bg-blue-600"}`}></div>
-            <span className={`font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase ${isDark ? "text-blue-400" : "text-blue-600"}`}>
-              About Me
-            </span>
-            <div className={`w-8 h-[1.5px] ${isDark ? "bg-blue-500 shadow-[0_0_8px_#3b82f6]" : "bg-blue-600"}`}></div>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-8 h-[2px] bg-blue-600"></div>
+            <span className="font-bold tracking-[0.3em] text-[10px] uppercase text-blue-500">About Me</span>
+            <div className="w-8 h-[2px] bg-blue-600"></div>
           </div>
-          <h2 className={`text-4xl md:text-6xl font-black tracking-tighter leading-none max-w-3xl ${titleColor}`}>
-            Get to Know About Me
+          <h2 className={`text-5xl md:text-7xl font-black tracking-tighter ${textColor}`}>
+            Get to Know <span className={`text-transparent bg-clip-text bg-gradient-to-r ${accentGradient}`}>About Me</span>
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="max-w-4xl mx-auto">
           
-          {/* BAGIAN KIRI - VISUAL (Frame Glowing Serasi Hero) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+          {/* MAIN CARD */}
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative group"
+            className={`relative p-8 md:p-14 rounded-[3rem] border transition-all duration-500 ${cardBg}`}
           >
-            {/* Glow effect di belakang foto */}
-            <div className={`absolute inset-0 rounded-[2.5rem] blur-2xl opacity-40 transition-colors ${isDark ? "bg-blue-600" : "bg-blue-400"}`}></div>
             
-            <div className="relative p-1.5 rounded-[2.5rem] bg-gradient-to-tr from-[#1E3A8A] via-[#3B82F6] to-[#06B6D4]">
-              <div className={`aspect-[4/5] rounded-[2.3rem] overflow-hidden border-[4px] ${isDark ? "border-[#0B1120]" : "border-white"}`}>
-                <img 
-                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop" 
-                  alt="Nabilah" 
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
-                />
+            {/* TANDA PETIK */}
+            <div className={`absolute -top-7 -left-5 w-16 h-16 rounded-2xl flex items-center justify-center text-white transform -rotate-12 
+              ${isDark ? "bg-[#1E3A8A] shadow-[0_0_20px_#1E3A8A]" : "bg-blue-600 shadow-xl"}`}>
+              <Quote size={32} />
+            </div>
+
+            <div className="text-center">
+              <h3 className={`text-2xl md:text-3xl font-extrabold mb-10 tracking-tight ${textColor}`}>
+                Merging <span className="text-blue-500">Logic</span> with Creativity.
+              </h3>
+              
+              <div className={`space-y-6 text-base md:text-xl font-medium leading-relaxed ${subTextColor}`}>
+                <p>
+                  Perkenalkan, saya <span className="text-blue-500 font-bold">Nabilah Quratul Aini</span>, siswi kelas X-10 dari <span className="text-blue-500 font-bold">MAN 1 Banda Aceh</span>. Website ini dikembangkan sebagai bagian dari tugas praktik koding saya untuk memahami <span className="italic">web development workflow</span> serta meningkatkan kemampuan teknis dalam membangun tampilan digital yang rapi dan fungsional.
+                </p>
+                <p>
+                  Melalui proses ini, saya berupaya melatih ketelitian dan kreativitas dalam menghasilkan karya yang informatif. Sebagai pelajar, saya memiliki minat tinggi untuk terus belajar dan <span className="italic text-blue-500 font-bold">stay adaptive</span> terhadap perkembangan teknologi digital.
+                </p>
               </div>
             </div>
           </motion.div>
 
-          {/* BAGIAN KANAN - TEKS */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col"
-          >
-            <h3 className={`text-2xl md:text-3xl font-extrabold mb-8 leading-tight tracking-tight ${titleColor}`}>
-              Merging <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] to-[#06B6D4]">Logic with Creativity.</span>
-            </h3>
-            
-            <div className={`space-y-6 text-sm md:text-lg font-medium leading-relaxed ${textColor}`}>
-              <p>
-                Perkenalkan, saya <span className={`font-bold ${isDark ? "text-white" : "text-slate-900"}`}>Nabilah Quratul Aini</span>, siswi kelas X-10 dari <span className={`font-bold ${isDark ? "text-white" : "text-slate-900"}`}>MAN 1 Banda Aceh</span>. Website ini dikembangkan sebagai bagian dari tugas praktik koding saya untuk memahami <span className="italic text-blue-500">web development workflow</span> serta meningkatkan kemampuan teknis dalam membangun tampilan digital yang rapi dan fungsional.
-              </p>
-              
-              <p>
-                Melalui proses ini, saya berupaya melatih ketelitian dan kreativitas dalam menghasilkan karya yang informatif. Sebagai pelajar, saya memiliki minat tinggi untuk terus belajar dan <span className="italic text-blue-500">stay adaptive</span> terhadap perkembangan teknologi digital guna menciptakan <span className="italic text-blue-500">high-quality digital interfaces</span> di masa depan.
-              </p>
-            </div>
-
-            {/* STATS GRID */}
-            <div className="grid grid-cols-2 gap-4 md:gap-6 pt-12">
-              {stats.map((stat, index) => (
-                <div key={index} className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${isDark ? "border-slate-800 bg-slate-900/50" : "border-slate-100 bg-white shadow-sm"}`}>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${iconBg}`}>
-                    <stat.icon size={18} className="text-blue-500" />
-                  </div>
-                  <div>
-                    <h4 className={`font-extrabold text-lg leading-none ${titleColor}`}>{stat.value}</h4>
-                    <p className="text-slate-400 text-[10px] uppercase tracking-[0.1em] font-bold mt-1">{stat.label}</p>
-                  </div>
+          {/* STATS GRID */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+            {stats.map((item, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className={`p-6 rounded-[2rem] border transition-all duration-300 group hover:-translate-y-2
+                  ${isDark ? "border-slate-800 bg-[#0F172A]/50 hover:border-blue-500" : "border-slate-100 bg-white shadow-md"}`}
+              >
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 
+                  ${isDark ? "bg-blue-900/30 text-blue-400 group-hover:bg-blue-600 group-hover:text-white" : "bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white"}`}>
+                  <item.icon size={24} />
                 </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+                <h4 className={`font-black text-xl mb-1 ${textColor}`}>{item.value}</h4>
+                <p className="text-slate-500 text-[10px] uppercase tracking-widest font-bold">{item.label}</p>
+              </motion.div>
+            ))}
+          </div>
+
+        </div> 
       </div>
     </section>
   );
