@@ -18,7 +18,6 @@ export default function AboutSection() {
   const textColor = isDark ? "text-white" : "text-slate-900";
   const subTextColor = isDark ? "text-slate-400" : "text-slate-500";
   
-  // GRADASI DISESUAIKAN: Senada dengan tulisan biru "About Me"
   const accentGradient = isDark 
     ? "from-[#3B82F6] via-[#60A5FA] to-[#06B6D4]" 
     : "from-[#1E3A8A] via-[#3B82F6] to-[#06B6D4]";
@@ -52,7 +51,6 @@ export default function AboutSection() {
             <div className="w-8 h-[2px] bg-blue-600"></div>
           </div>
           
-          {/* Judul sekarang full gradasi biru, tidak ada warna hitam lagi */}
           <h2 className={`text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r ${accentGradient}`}>
             Get to Know About Me
           </h2>

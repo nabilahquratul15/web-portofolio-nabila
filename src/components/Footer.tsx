@@ -20,7 +20,6 @@ export default function Footer() {
     { icon: Instagram, href: "https://www.instagram.com/nabbilaa.n/", label: 'Instagram' },
   ];
 
-  // GRADASI WARNA (Disamakan persis dengan logika Navbar kamu)
   const bgGradient = isDark 
     ? "bg-gradient-to-r from-[#0F172A] via-[#1E3A8A] to-[#1E40AF]" // Dark Mode
     : "bg-gradient-to-r from-[#1E3A8A] via-[#3B82F6] to-[#06B6D4]"; // Light Mode
@@ -47,7 +46,6 @@ export default function Footer() {
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
               >
-                {/* INI YANG DIUBAH JADI MERAH MENYALA */}
                 <Heart className="h-5 w-5 text-red-500 fill-red-500 shadow-xl" />
               </motion.div>
               <span className="tracking-tight">by Nabila</span>
