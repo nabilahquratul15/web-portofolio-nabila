@@ -13,8 +13,8 @@ const projects = [
     isComingSoon: false
   },
   {
-    title: 'Next Big Project',
-    description: 'Sedang dalam tahap perencanaan dan riset. Fokus pada solusi digital yang bermanfaat bagi lingkungan sekolah di MAN 1 Banda Aceh.',
+    title: 'Next Project',
+    description: 'Nantikan proyek selanjuutnya',
     icon: <Sparkles size={48} />,
     color: 'from-purple-600/20 to-indigo-500/20',
     tags: ['Planning', 'Research'],
@@ -33,7 +33,6 @@ export default function ProjectsSection() {
     <section id="projects" className="py-24 bg-[#FCFCFC] dark:bg-[#0B1120] transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-6 relative">
         
-        {/* HEADER DENGAN SPASI DAN GLOW */}
         <div className="text-center mb-20 flex flex-col items-center gap-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -58,7 +57,6 @@ export default function ProjectsSection() {
           />
         </div>
 
-        {/* CAROUSEL */}
         <div className="relative max-w-5xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
@@ -71,7 +69,6 @@ export default function ProjectsSection() {
             >
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 
-                {/* Visual Area */}
                 <div className={`aspect-video rounded-[2rem] bg-gradient-to-br ${projects[index].color} flex items-center justify-center text-blue-500 shadow-inner relative overflow-hidden group`}>
                   <motion.div 
                     key={index}
@@ -83,7 +80,6 @@ export default function ProjectsSection() {
                   </motion.div>
                 </div>
                 
-                {/* Info Area */}
                 <div className="space-y-6 text-left">
                   <div className="space-y-3">
                     <h3 className="text-3xl md:text-4xl font-black dark:text-white tracking-tight flex items-center gap-3">
@@ -106,7 +102,6 @@ export default function ProjectsSection() {
                     {projects[index].description}
                   </p>
 
-                  {/* LINK HANYA ADA DI PROJECT 1 */}
                   {!projects[index].isComingSoon && (
                     <div className="flex gap-6 pt-4">
                       <a 
@@ -127,7 +122,6 @@ export default function ProjectsSection() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Buttons */}
           <button 
             onClick={prev} 
             className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-20 p-4 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md shadow-xl rounded-2xl text-blue-600 border border-white dark:border-slate-700 hover:scale-110 active:scale-95 transition-all"
@@ -142,7 +136,6 @@ export default function ProjectsSection() {
           </button>
         </div>
 
-        {/* DOTS INDICATOR */}
         <div className="flex justify-center gap-3 mt-12">
           {projects.map((_, i) => (
             <div 
