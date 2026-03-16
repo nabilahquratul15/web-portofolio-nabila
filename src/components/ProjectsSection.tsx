@@ -16,7 +16,7 @@ const projects = [
     title: 'Next Project',
     description: 'Nantikan project selanjutnya',
     icon: <Sparkles size={48} />,
-    color: 'from-purple-600/20 to-indigo-500/20',
+    color: 'from-blue-600/20 to-indigo-500/20', 
     tags: ['Planning', 'Research'],
     demo: null,
     isComingSoon: true
@@ -58,6 +58,17 @@ export default function ProjectsSection() {
         </div>
 
         <div className="relative max-w-5xl mx-auto">
+          
+          <div className="absolute inset-0 z-0 flex items-center justify-center">
+            <motion.div
+              key={`glow-${index}`}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1.1, opacity: 0.6 }}
+              transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+              className="absolute w-[80%] h-[70%] rounded-full blur-[110px] bg-blue-500/30 dark:bg-blue-600/20"
+            />
+          </div>
+
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
@@ -65,7 +76,7 @@ export default function ProjectsSection() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.4 }}
-              className="bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-xl p-8 md:p-14 rounded-[3rem] shadow-2xl border border-white/20 dark:border-blue-900/30"
+              className="relative z-10 bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-xl p-8 md:p-14 rounded-[3rem] shadow-2xl border border-white/20 dark:border-blue-900/30"
             >
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 
