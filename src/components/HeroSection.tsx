@@ -19,7 +19,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5 }}
               className="mb-4 flex items-center gap-4"
             >
-            <div className="w-10 h-[1.5px] rounded-full bg-blue-600 dark:bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+              <div className="w-10 h-[1.5px] rounded-full bg-blue-600 dark:bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
               <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-blue-600 dark:text-blue-400">
                 Hi, Welcome To My Space
               </span>
@@ -65,7 +65,7 @@ export default function HeroSection() {
               
               <div className="flex gap-6 items-center text-slate-400">
                 <a href="https://github.com/nabilahquratul15" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors"><Github size={22} /></a>
-                <a href={`mailto:${myEmail}`} className="hover:text-blue-400 transition-colors"><Mail size={22} /></a>
+                <a href={`mailto:${myEmail}`} target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors"><Mail size={22} /></a>
                 <a href="https://www.instagram.com/nabbilaa.n" target="_blank" rel="noreferrer" className="hover:text-pink-500 transition-colors"><Instagram size={22} /></a>
               </div>
             </motion.div>
