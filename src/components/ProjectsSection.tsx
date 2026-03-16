@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Laptop, Sparkles, ExternalLink, Code } from 
 
 const projects = [
   {
-    title: 'Modern Personal Portfolio',
+    title: 'Website Portfolio',
     description: 'Project website yang sedang Anda jelajahi saat ini. Dibangun dengan fokus pada pengalaman pengguna yang halus dan desain yang adaptif.',
     icon: <Laptop size={48} />,
     color: 'from-blue-600/20 to-cyan-500/20',
@@ -14,7 +14,7 @@ const projects = [
   },
   {
     title: 'Next Project',
-    description: 'Nantikan proyek selanjuutnya',
+    description: 'Nantikan project selanjutnya',
     icon: <Sparkles size={48} />,
     color: 'from-purple-600/20 to-indigo-500/20',
     tags: ['Planning', 'Research'],
