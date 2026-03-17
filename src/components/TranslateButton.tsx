@@ -1,7 +1,6 @@
 import React from 'react';
 import { Languages } from 'lucide-react';
 
-// Menambahkan definisi tipe global agar TypeScript mengenali fungsi Google Translate
 declare global {
   interface Window {
     googleTranslateElementInit?: () => void;
@@ -9,32 +8,36 @@ declare global {
 }
 
 export default function TranslateButton() {
-  const toggleTranslate = () => {
-    // Mencari elemen dropdown asli Google Translate
-    const googleDiv = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-    
-    if (googleDiv) {
-      // Ganti bahasa: ID <-> EN
-      googleDiv.value = googleDiv.value === 'en' ? 'id' : 'en';
-      googleDiv.dispatchEvent(new Event('change'));
+  const switchLanguage = () => {
+    // Mencari elemen dropdown asli Google
+    const selectElement = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+
+    if (selectElement) {
+      // Switch antara Inggris (en) dan Indonesia (id)
+      const targetLang = selectElement.value === 'en' ? 'id' : 'en';
+      selectElement.value = targetLang;
+      
+      // Memicu event agar Google langsung menerjemahkan
+      selectElement.dispatchEvent(new Event('change'));
     } else {
-      // Memanggil fungsi init secara aman tanpa 'any'
       if (window.googleTranslateElementInit) {
         window.googleTranslateElementInit();
       }
-      alert("Sedang menghubungkan ke server Google Translate. Tunggu 3 detik lalu klik lagi ya!");
+      
+      // Coba lagi otomatis dalam 1 detik tanpa campur tangan user
+      setTimeout(switchLanguage, 1000);
     }
   };
 
   return (
     <div className="fixed bottom-6 right-6 z-[9999]">
       <button
-        onClick={toggleTranslate}
-        className="group flex items-center gap-2 px-5 py-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all hover:-translate-y-1 active:scale-95"
+        onClick={switchLanguage}
+        className="group flex items-center gap-3 px-5 py-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white shadow-[0_4px_20px_rgba(37,99,235,0.4)] transition-all hover:scale-105 active:scale-95 border-none cursor-pointer"
       >
-        <Languages size={18} className="group-hover:rotate-12 transition-transform" />
-        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white">
-          EN / ID
+        <Languages size={20} className="group-hover:rotate-12 transition-transform" />
+        <span className="text-[10px] font-bold tracking-widest uppercase">
+          Translate
         </span>
       </button>
     </div>

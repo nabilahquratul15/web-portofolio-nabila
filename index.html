@@ -3,43 +3,44 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
     <title>Nabila | Portofolio</title>
-
     <link rel="icon" href="/favicon.ico" type="image/ico" />
-
     <meta name="theme-color" content="#B2E2F2" />
 
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'id',
-          includedLanguages: 'en,id',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-          autoDisplay: false
-        }, 'google_translate_element');
-      }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <style>
-        body {
-            margin: 0;
+        body { 
+            margin: 0; 
             background-color: #f9f9f9; 
-            font-family: sans-serif;
+            font-family: sans-serif; 
+            top: 0px !important; /* Paksa konten tidak turun ke bawah */
         }
-        /* CSS AGAR TETAP BERSIH TAPI FITURNYA JALAN */
-        .goog-te-banner-frame.skiptranslate { display: none !important; } 
-        body { top: 0px !important; }
         
-        /* Ubah ini: jangan pakai display none, pakai opacity agar tetap dimuat */
-        #google_translate_element { 
+        /* 1. Sembunyikan semua elemen banner Google Translate */
+        .goog-te-banner-frame.skiptranslate, 
+        .goog-te-banner-frame, 
+        .goog-te-balloon-frame,
+        #goog-gt-tt { 
+            display: none !important; 
+        }
+
+        /* 2. Hilangkan shadow/highlight biru saat teks di-hover */
+        font {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            display: inline !important;
+        }
+
+        /* 3. Pastikan Navbar tidak terdorong */
+        .skiptranslate {
+            display: none !important;
+        }
+        
+        /* Elemen mesin translate (tersembunyi) */
+        #google_translate_element {
             position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0; 
-            pointer-events: none;
-            z-index: -1;
+            top: -9999px;
+            left: -9999px;
+            visibility: hidden;
         }
     </style>
 </head>
@@ -47,6 +48,17 @@
     <div id="google_translate_element"></div>
     
     <div id="root"></div>
+    
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'id',
+          includedLanguages: 'en,id',
+          autoDisplay: false
+        }, 'google_translate_element');
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
