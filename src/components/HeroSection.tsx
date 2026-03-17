@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Github, Instagram, Mail } from 'lucide-react';
 
 export default function HeroSection() {
+  // Sudah menggunakan email baru kamu
   const myEmail = "nabilahaini1504@gmail.com";
 
   return (
@@ -71,7 +72,6 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* BAGIAN FOTO */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -80,10 +80,11 @@ export default function HeroSection() {
             className="relative flex-shrink-0 order-1 lg:order-2"
           >
             <div className="absolute inset-[-60px] rounded-full blur-[90px] bg-blue-400/40 dark:bg-blue-600/60 transition-all duration-700"></div>
+            
             <div className="relative w-64 h-64 md:w-80 lg:w-[380px] lg:h-[380px] rounded-full flex items-center justify-center p-[5px] bg-gradient-to-r from-[#1E3A8A] via-[#3B82F6] to-[#06B6D4] shadow-2xl">
               <div className="relative z-10 w-full h-full rounded-full overflow-hidden border-[4px] border-white dark:border-[#0B1120]">
                 <img 
-                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop" 
+                  src="https://i.pinimg.com/736x/72/97/27/729727b6bc49950fcb183bb67e5ec66d.jpg" 
                   alt="Nabilah" 
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" 
                 />

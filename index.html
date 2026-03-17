@@ -10,16 +10,42 @@
 
     <meta name="theme-color" content="#B2E2F2" />
 
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'id',
+          includedLanguages: 'en,id',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false
+        }, 'google_translate_element');
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <style>
-      
         body {
             margin: 0;
             background-color: #f9f9f9; 
             font-family: sans-serif;
         }
+        /* CSS AGAR TETAP BERSIH TAPI FITURNYA JALAN */
+        .goog-te-banner-frame.skiptranslate { display: none !important; } 
+        body { top: 0px !important; }
+        
+        /* Ubah ini: jangan pakai display none, pakai opacity agar tetap dimuat */
+        #google_translate_element { 
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0; 
+            pointer-events: none;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
+    <div id="google_translate_element"></div>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 </body>

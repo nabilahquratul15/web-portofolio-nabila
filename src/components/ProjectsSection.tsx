@@ -6,9 +6,8 @@ const projects = [
   {
     title: 'Website Portfolio',
     description: 'Project website yang sedang Anda jelajahi saat ini. Dibangun dengan fokus pada pengalaman pengguna yang halus dan desain yang adaptif.',
-    // --- MURNI PAKE ICON MELAYANG (GAMBAR AI HAPUS) ---
     icon: <Laptop size={72} />,
-    color: 'from-blue-600/25 to-cyan-500/25', // Gradasi sedikit lebih tebal
+    color: 'from-blue-600/25 to-cyan-500/25',
     tags: ['React', 'Tailwind', 'Framer Motion'],
     demo: '#',
     isComingSoon: false
@@ -28,19 +27,14 @@ export default function ProjectsSection() {
   const [index, setIndex] = useState(0);
   const [isDark, setIsDark] = useState(false);
 
-  // Deteksi Dark Mode agar senada dengan About
   useEffect(() => {
     const check = () => setIsDark(document.documentElement.classList.contains('dark'));
     const obs = new MutationObserver(check);
     obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     check();
     
-    // Auto-play Carousel (pindah tiap 5 detik)
-    const interval = setInterval(next, 5000);
-    return () => {
-      obs.disconnect();
-      clearInterval(interval);
-    };
+    // --- AUTO-PLAY DIHAPUS AGAR TIDAK GESER SENDIRI ---
+    return () => obs.disconnect();
   }, []);
 
   const next = () => setIndex((prev) => (prev + 1) % projects.length);
@@ -56,12 +50,10 @@ export default function ProjectsSection() {
   return (
     <section id="projects" className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ${bgColor}`}>
       
-      {/* Glow Background - Senada dengan About */}
       <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-20 pointer-events-none ${isDark ? "bg-blue-600" : "bg-blue-200"}`}></div>
 
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* --- HEADER - IDENTIK DENGAN ABOUT (DIPERBAIKI AGAR TIDAK KEPOTONG) --- */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +67,6 @@ export default function ProjectsSection() {
             <div className="w-8 h-[2px] bg-blue-600"></div>
           </div>
           
-          {/* Perbaikan: Menambahkan h-full dan py-4 agar gradasi teks tidak terpotong */}
           <h2 className={`h-full py-4 text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r leading-[1.1] ${accentGradient}`}>
             Selected Projects
           </h2>
@@ -89,9 +80,7 @@ export default function ProjectsSection() {
           />
         </motion.div>
 
-        {/* CAROUSEL SECTION */}
         <div className="relative max-w-5xl mx-auto">
-          
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
@@ -99,16 +88,12 @@ export default function ProjectsSection() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.05 }}
               transition={{ duration: 0.5 }}
-              // HOVER: Card melayang (Sama dengan About)
               whileHover={{ y: -10 }}
               className={`relative z-10 p-8 md:p-14 rounded-[3rem] border transition-all duration-500 group ${cardBg}`}
             >
               <div className="grid md:grid-cols-2 gap-12 items-center">
-                
-                {/* Image/Icon Box dengan Animasi Gerak Melayang */}
                 <div className={`aspect-square md:aspect-video rounded-[2rem] bg-gradient-to-br ${projects[index].color} flex items-center justify-center text-blue-500 shadow-inner relative overflow-hidden border border-white/10 group/img`}>
                   
-                  {/* --- ANIMASI ICON MELAYANG (CLEAN & KEREN) --- */}
                   <motion.div 
                     animate={{ 
                       y: [0, -20, 0],
@@ -119,13 +104,11 @@ export default function ProjectsSection() {
                       repeat: Infinity, 
                       ease: "easeInOut" 
                     }}
-                    // Efek shadow mentereng di belakang ikon
                     className={`drop-shadow-[0_0_25px_rgba(59,130,246,0.6)] text-blue-600 dark:text-blue-400 group-hover/img:scale-110 transition-transform duration-500`}
                   >
                     {projects[index].icon}
                   </motion.div>
 
-                  {/* Efek Kilatan Cahaya Bergerak (Shine) */}
                   <motion.div 
                     animate={{ x: ['-100%', '200%'] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
@@ -133,7 +116,6 @@ export default function ProjectsSection() {
                   />
                 </div>
                 
-                {/* Project Info */}
                 <div className="space-y-6 text-left">
                   <div className="space-y-4">
                     <h3 className={`text-3xl md:text-4xl font-black tracking-tight transition-colors duration-300 group-hover:text-blue-500 ${textColor}`}>
@@ -176,7 +158,6 @@ export default function ProjectsSection() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigasi Carousel */}
           <button 
             onClick={prev} 
             className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-20 p-4 bg-white dark:bg-slate-800 shadow-xl rounded-2xl text-blue-600 border border-slate-100 dark:border-slate-700 hover:scale-110 hover:bg-blue-600 hover:text-white transition-all"
@@ -191,7 +172,6 @@ export default function ProjectsSection() {
           </button>
         </div>
 
-        {/* Dot Indicators */}
         <div className="flex justify-center gap-3 mt-12">
           {projects.map((_, i) => (
             <button
@@ -201,7 +181,6 @@ export default function ProjectsSection() {
             />
           ))}
         </div>
-
       </div>
     </section>
   );
