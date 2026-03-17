@@ -1,86 +1,149 @@
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Film, Languages, PenTool, Coffee, Heart } from 'lucide-react';
+
+const subjects = {
+  sains: [
+    { name: 'Fisika', level: 88 },
+    { name: 'Kimia', level: 85 },
+    { name: 'Biologi', level: 95 },
+    { name: 'Matematika IPA', level: 85 },
+  ],
+  sosial: [
+    { name: 'Sosiologi', level: 90 },
+    { name: 'Ekonomi', level: 89 },
+    { name: 'Geografi', level: 89 },
+    { name: 'Sejarah', level: 92 },
+  ],
+  bahasa: [
+    { name: 'Bahasa Indonesia', level: 92 },
+    { name: 'Bahasa Inggris', level: 96},
+    { name: 'Bahasa Arab', level: 85 },
+  ],
+};
+
+function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay }}
+      className="space-y-2"
+    >
+      <div className="flex justify-between items-center text-slate-700 dark:text-slate-300">
+        <span className="font-medium">{name}</span>
+        <span className="text-sm font-bold text-blue-600 dark:text-blue-400">{level}%</span>
+      </div>
+      <div className="h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: `${level}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: delay + 0.2, ease: [0.33, 1, 0.68, 1] }}
+          className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 shadow-[0_0_12px_rgba(37,99,235,0.4)]"
+        />
+      </div>
+    </motion.div>
+  );
+}
 
 export default function SkillsSection() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsDark(document.documentElement.classList.contains('dark'));
-    const obs = new MutationObserver(check);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    check();
-    return () => obs.disconnect();
-  }, []);
-
-  const skillList = [
-    { name: "Literary Lover", desc: "Sangat suka membaca berbagai genre cerita & buku.", icon: BookOpen, color: "text-blue-500" },
-    { name: "Movie Enthusiast", desc: "Menikmati dunia sinematografi & alur cerita film.", icon: Film, color: "text-purple-500" },
-    { name: "English Skill", desc: "Mampu berkomunikasi & memahami teks Bahasa Inggris.", icon: Languages, color: "text-orange-500" },
-    { name: "Creative Thinking", desc: "Berimajinasi luas berkat hobi membaca & menonton.", icon: PenTool, color: "text-pink-500" },
-    { name: "Storytelling", desc: "Bisa menceritakan kembali hal menarik dengan seru.", icon: Heart, color: "text-red-500" },
-    { name: "Quick Learner", desc: "Mudah menyerap informasi baru dari berbagai media.", icon: Coffee, color: "text-emerald-500" },
-  ];
-
-  const headerGradient = isDark 
-    ? "from-[#1E3A8A] via-[#3B82F6] to-[#1E40AF]" 
-    : "from-[#3B82F6] via-[#60A5FA] to-[#06B6D4]";
-
   return (
-    <section id="skills" className={`relative py-24 transition-colors duration-500 overflow-hidden ${isDark ? "bg-[#0B1120]" : "bg-[#FCFCFC]"}`}>
+    <section id="skills" className="py-24 bg-[#FCFCFC] dark:bg-[#0B1120] transition-colors duration-500 overflow-hidden relative">
+      
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1.2, opacity: 0.5 }}
+          transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse" }}
+          className="absolute w-[120%] h-[120%] rounded-full blur-[150px] bg-blue-500/20 dark:bg-blue-600/10"
+        />
+      </div>
+
       <div className="container mx-auto px-6 relative z-10">
         
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20 flex flex-col items-center"
+          className="text-center mb-20 flex flex-col items-center gap-4"
         >
-          <span className="text-blue-500 font-bold tracking-[0.3em] text-[10px] uppercase block mb-2">Personal Interest</span>
-          <h2 className={`text-4xl md:text-6xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r ${headerGradient}`}>
-            Hobi & Keahlian <span className="opacity-80"></span>
+          <span className="text-blue-600 dark:text-blue-400 font-bold tracking-widest uppercase text-sm block">Akademik</span>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-slate-900 dark:text-white drop-shadow-[0_0_10px_rgba(37,99,235,0.2)] py-2">
+            Pelajaran & <span className="text-blue-600">Nilai</span>
           </h2>
-          <div className={`h-1.5 w-20 rounded-full bg-gradient-to-r ${headerGradient}`}></div>
+          <motion.div 
+            initial={{ width: 0, opacity: 0 }}
+            whileInView={{ width: "100px", opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="h-[5px] bg-blue-600 mx-auto rounded-full shadow-[0_0_20px_rgba(37,99,235,0.7)]" 
+          />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-5xl mx-auto">
-          {skillList.map((skill, index) => (
-            <div key={index} className="relative group">
-              
-              <div className={`absolute -inset-4 transition-all duration-500 blur-3xl pointer-events-none rounded-[3rem] 
-                ${isDark 
-                  ? "bg-blue-600/20 opacity-40 group-hover:opacity-80 group-hover:bg-blue-500/30" 
-                  : "bg-blue-400/15 opacity-30 group-hover:opacity-70 group-hover:bg-blue-300/40"}`}
-              ></div>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative z-10 p-8 rounded-[2.5rem] border transition-all duration-300 group-hover:-translate-y-2 h-full
-                  ${isDark 
-                    ? "border-slate-800 bg-[#0F172A] hover:border-blue-500/50 shadow-2xl" 
-                    : "border-slate-100 bg-white shadow-xl shadow-blue-100/50 hover:border-blue-200"}`}
-              >
-                <div className="flex flex-col items-center text-center">
-                  <div className={`p-5 rounded-2xl mb-5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 
-                    ${isDark ? "bg-slate-800 shadow-inner" : "bg-blue-50"} ${skill.color}`}>
-                    <skill.icon size={36} />
-                  </div>
-                  
-                  <h3 className={`text-xl font-black tracking-tight mb-2 ${isDark ? "text-white" : "text-slate-900"}`}>
-                    {skill.name}
-                  </h3>
-                  
-                  <p className={`text-sm leading-relaxed ${isDark ? "text-slate-400" : "text-slate-500"}`}>
-                    {skill.desc}
-                  </p>
-                </div>
-              </motion.div>
+        <div className="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            whileHover={{ y: -15, scale: 1.02 }}
+            className="p-9 bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl rounded-[2.5rem] border border-slate-200/60 dark:border-blue-900/30 shadow-2xl transition-all duration-300"
+          >
+            <div className="flex items-center gap-5 mb-10">
+              <div className="p-4 rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600">
+                <span className="text-3xl">🧬</span>
+              </div>
+              <h3 className="text-3xl font-black dark:text-white tracking-tight">Sains (IPA)</h3>
             </div>
-          ))}
+            <div className="space-y-8">
+              {subjects.sains.map((item, idx) => (
+                <SkillBar key={item.name} {...item} delay={idx * 0.1} />
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            whileHover={{ y: -15, scale: 1.02 }}
+            className="p-9 bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl rounded-[2.5rem] border border-slate-200/60 dark:border-blue-900/30 shadow-2xl transition-all duration-300"
+          >
+            <div className="flex items-center gap-5 mb-10">
+              <div className="p-4 rounded-2xl bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600">
+                <span className="text-3xl">🌍</span>
+              </div>
+              <h3 className="text-3xl font-black dark:text-white tracking-tight">Sosial (IPS)</h3>
+            </div>
+            <div className="space-y-8">
+              {subjects.sosial.map((item, idx) => (
+                <SkillBar key={item.name} {...item} delay={idx * 0.1} />
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ y: -15, scale: 1.02 }}
+            className="p-9 bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl rounded-[2.5rem] border border-slate-200/60 dark:border-blue-900/30 shadow-2xl transition-all duration-300"
+          >
+            <div className="flex items-center gap-5 mb-10">
+              <div className="p-4 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600">
+                <span className="text-3xl">📚</span>
+              </div>
+              <h3 className="text-3xl font-black dark:text-white tracking-tight">Bahasa</h3>
+            </div>
+            <div className="space-y-8">
+              {subjects.bahasa.map((item, idx) => (
+                <SkillBar key={item.name} {...item} delay={idx * 0.1} />
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
