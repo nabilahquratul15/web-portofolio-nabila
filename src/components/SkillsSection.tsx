@@ -1,4 +1,6 @@
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Beaker, Globe2, BookOpen, GraduationCap } from 'lucide-react';
 
 const subjects = {
   sains: [
@@ -20,26 +22,26 @@ const subjects = {
   ],
 };
 
-function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
+function SkillBar({ name, level, isDark, delay }: { name: string; level: number; isDark: boolean; delay: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="space-y-2"
+      className="space-y-3"
     >
-      <div className="flex justify-between items-center text-slate-700 dark:text-slate-300">
-        <span className="font-medium">{name}</span>
-        <span className="text-sm font-bold text-blue-600 dark:text-blue-400">{level}%</span>
+      <div className="flex justify-between items-center">
+        <span className={`font-bold tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>{name}</span>
+        <span className="text-sm font-black text-blue-500">{level}%</span>
       </div>
-      <div className="h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+      <div className={`h-3 rounded-full overflow-hidden ${isDark ? "bg-slate-800" : "bg-slate-100"}`}>
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: delay + 0.2, ease: [0.33, 1, 0.68, 1] }}
-          className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 shadow-[0_0_12px_rgba(37,99,235,0.4)]"
+          transition={{ duration: 1.2, delay: delay + 0.2, ease: "circOut" }}
+          className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 shadow-[0_0_15px_rgba(37,99,235,0.4)]"
         />
       </div>
     </motion.div>
@@ -47,104 +49,100 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
 }
 
 export default function SkillsSection() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsDark(document.documentElement.classList.contains('dark'));
+    const obs = new MutationObserver(check);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    check();
+    return () => obs.disconnect();
+  }, []);
+
+  const bgColor = isDark ? "bg-[#0B1120]" : "bg-[#FCFCFC]";
+  const cardBg = isDark ? "bg-[#0F172A]/90 border-blue-900/50 shadow-[0_0_40px_rgba(30,58,138,0.3)]" : "bg-white border-slate-100 shadow-2xl";
+  const textColor = isDark ? "text-white" : "text-slate-900";
+  const accentGradient = isDark 
+    ? "from-[#3B82F6] via-[#60A5FA] to-[#06B6D4]" 
+    : "from-[#1E3A8A] via-[#3B82F6] to-[#06B6D4]";
+
+  const categories = [
+    { id: 'sains', title: 'Sains (IPA)', icon: Beaker, items: subjects.sains },
+    { id: 'sosial', title: 'Sosial (IPS)', icon: Globe2, items: subjects.sosial },
+    { id: 'bahasa', title: 'Bahasa', icon: BookOpen, items: subjects.bahasa },
+  ];
+
   return (
-    <section id="skills" className="py-24 bg-[#FCFCFC] dark:bg-[#0B1120] transition-colors duration-500 overflow-hidden relative">
+    <section id="skills" className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ${bgColor}`}>
       
-      <div className="absolute inset-0 z-0 flex items-center justify-center">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1.2, opacity: 0.5 }}
-          transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute w-[120%] h-[120%] rounded-full blur-[150px] bg-blue-500/20 dark:bg-blue-600/10"
-        />
-      </div>
+      {/* Glow Background - Identik dengan About */}
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-20 pointer-events-none ${isDark ? "bg-blue-600" : "bg-blue-200"}`}></div>
 
       <div className="container mx-auto px-6 relative z-10">
         
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
+        {/* HEADER SECTION - SAMA DENGAN ABOUT */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20 flex flex-col items-center gap-4"
+          className="flex flex-col items-center text-center mb-20"
         >
-          <span className="text-blue-600 dark:text-blue-400 font-bold tracking-widest uppercase text-sm block">Akademik</span>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-slate-900 dark:text-white drop-shadow-[0_0_10px_rgba(37,99,235,0.2)] py-2">
-            Pelajaran & <span className="text-blue-600">Nilai</span>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-8 h-[2px] bg-blue-600"></div>
+            <span className="font-bold tracking-[0.3em] text-[10px] uppercase text-blue-500">Academic Skills</span>
+            <div className="w-8 h-[2px] bg-blue-600"></div>
+          </div>
+          
+          <h2 className={`text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r ${accentGradient}`}>
+            Pelajaran & Nilai
           </h2>
+          
           <motion.div 
             initial={{ width: 0, opacity: 0 }}
             whileInView={{ width: "100px", opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="h-[5px] bg-blue-600 mx-auto rounded-full shadow-[0_0_20px_rgba(37,99,235,0.7)]" 
+            className={`h-1.5 mt-6 rounded-full bg-gradient-to-r ${accentGradient}`}
           />
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            whileHover={{ y: -15, scale: 1.02 }}
-            className="p-9 bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl rounded-[2.5rem] border border-slate-200/60 dark:border-blue-900/30 shadow-2xl transition-all duration-300"
-          >
-            <div className="flex items-center gap-5 mb-10">
-              <div className="p-4 rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600">
-                <span className="text-3xl">🧬</span>
+        {/* CARDS GRID */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {categories.map((cat, idx) => (
+            <motion.div
+              key={cat.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: idx * 0.1 }}
+              className={`relative p-8 md:p-10 rounded-[3rem] border transition-all duration-500 group hover:-translate-y-3 ${cardBg}`}
+            >
+              {/* Icon Box - Identik dengan Stats di About */}
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300 
+                ${isDark ? "bg-blue-900/30 text-blue-400 group-hover:bg-blue-600 group-hover:text-white" : "bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white"}`}>
+                <cat.icon size={32} />
               </div>
-              <h3 className="text-3xl font-black dark:text-white tracking-tight">Sains (IPA)</h3>
-            </div>
-            <div className="space-y-8">
-              {subjects.sains.map((item, idx) => (
-                <SkillBar key={item.name} {...item} delay={idx * 0.1} />
-              ))}
-            </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            whileHover={{ y: -15, scale: 1.02 }}
-            className="p-9 bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl rounded-[2.5rem] border border-slate-200/60 dark:border-blue-900/30 shadow-2xl transition-all duration-300"
-          >
-            <div className="flex items-center gap-5 mb-10">
-              <div className="p-4 rounded-2xl bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600">
-                <span className="text-3xl">🌍</span>
-              </div>
-              <h3 className="text-3xl font-black dark:text-white tracking-tight">Sosial (IPS)</h3>
-            </div>
-            <div className="space-y-8">
-              {subjects.sosial.map((item, idx) => (
-                <SkillBar key={item.name} {...item} delay={idx * 0.1} />
-              ))}
-            </div>
-          </motion.div>
+              <h3 className={`text-2xl font-black mb-8 tracking-tight ${textColor}`}>
+                {cat.title}
+              </h3>
 
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            whileHover={{ y: -15, scale: 1.02 }}
-            className="p-9 bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl rounded-[2.5rem] border border-slate-200/60 dark:border-blue-900/30 shadow-2xl transition-all duration-300"
-          >
-            <div className="flex items-center gap-5 mb-10">
-              <div className="p-4 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600">
-                <span className="text-3xl">📚</span>
+              <div className="space-y-8">
+                {cat.items.map((item, itemIdx) => (
+                  <SkillBar 
+                    key={item.name} 
+                    name={item.name} 
+                    level={item.level} 
+                    isDark={isDark} 
+                    delay={(idx * 0.1) + (itemIdx * 0.1)} 
+                  />
+                ))}
               </div>
-              <h3 className="text-3xl font-black dark:text-white tracking-tight">Bahasa</h3>
-            </div>
-            <div className="space-y-8">
-              {subjects.bahasa.map((item, idx) => (
-                <SkillBar key={item.name} {...item} delay={idx * 0.1} />
-              ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
+
       </div>
     </section>
   );
