@@ -101,7 +101,7 @@ export default function SkillsSection() {
           </div>
           
           <h2 className={`text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r ${accentGradient}`}>
-            Pelajaran & Nilai
+            My skills 
           </h2>
           
           <motion.div 
