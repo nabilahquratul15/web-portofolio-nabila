@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Beaker, Globe2, BookOpen, GraduationCap } from 'lucide-react';
+import { Beaker, Globe2, BookOpen } from 'lucide-react';
 
 const subjects = {
   sains: [
@@ -29,19 +29,25 @@ function SkillBar({ name, level, isDark, delay }: { name: string; level: number;
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="space-y-3"
+      className="group/bar space-y-3 cursor-default"
     >
       <div className="flex justify-between items-center">
-        <span className={`font-bold tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>{name}</span>
+        {/* Hover: Nama pelajaran berubah biru */}
+        <span className={`font-bold tracking-tight transition-colors duration-300 group-hover/bar:text-blue-500 ${isDark ? "text-white" : "text-slate-900"}`}>
+          {name}
+        </span>
         <span className="text-sm font-black text-blue-500">{level}%</span>
       </div>
-      <div className={`h-3 rounded-full overflow-hidden ${isDark ? "bg-slate-800" : "bg-slate-100"}`}>
+      
+      <div className={`h-3 rounded-full overflow-visible ${isDark ? "bg-slate-800" : "bg-slate-100"}`}>
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, delay: delay + 0.2, ease: "circOut" }}
-          className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+          // Hover: Bar sedikit membesar dan glow makin terang
+          whileHover={{ scaleY: 1.2, filter: "brightness(1.2)" }}
+          className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 shadow-[0_0_15px_rgba(37,99,235,0.4)] relative"
         />
       </div>
     </motion.div>
@@ -75,12 +81,12 @@ export default function SkillsSection() {
   return (
     <section id="skills" className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ${bgColor}`}>
       
-      {/* Glow Background - Identik dengan About */}
+      {/* Glow Background */}
       <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-20 pointer-events-none ${isDark ? "bg-blue-600" : "bg-blue-200"}`}></div>
 
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* HEADER SECTION - SAMA DENGAN ABOUT */}
+        {/* Header Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +113,7 @@ export default function SkillsSection() {
           />
         </motion.div>
 
-        {/* CARDS GRID */}
+        {/* Grid Card dengan Efek Hover */}
         <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {categories.map((cat, idx) => (
             <motion.div
@@ -116,11 +122,13 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: idx * 0.1 }}
-              className={`relative p-8 md:p-10 rounded-[3rem] border transition-all duration-500 group hover:-translate-y-3 ${cardBg}`}
+              // Hover: Card melayang dan shadow makin tebal
+              whileHover={{ y: -15, transition: { duration: 0.3 } }}
+              className={`relative p-8 md:p-10 rounded-[3rem] border transition-all duration-500 group ${cardBg}`}
             >
-              {/* Icon Box - Identik dengan Stats di About */}
+              {/* Icon Box */}
               <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300 
-                ${isDark ? "bg-blue-900/30 text-blue-400 group-hover:bg-blue-600 group-hover:text-white" : "bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white"}`}>
+                ${isDark ? "bg-blue-900/30 text-blue-400 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(37,99,235,0.5)]" : "bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white shadow-sm"}`}>
                 <cat.icon size={32} />
               </div>
 
@@ -142,7 +150,6 @@ export default function SkillsSection() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
